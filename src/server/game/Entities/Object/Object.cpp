@@ -2614,6 +2614,8 @@ std::vector<Creature*> WorldObject::FindNearestCreatures(uint32 entry, float ran
     }
     return returnList;
 }
+
+
 GameObject* WorldObject::FindNearestGameObject(uint32 entry, float range) const
 {
     GameObject* go = NULL;

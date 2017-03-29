@@ -818,7 +818,6 @@ struct EmotesEntry
     uint32 SpellVisualKitID;
     uint32 EmoteFlags;
     uint16 AnimID;
-	uint32 EmoteType;
     uint8 EmoteSpecProc;
     uint32 EmoteSpecProcParam;
     uint32 EmoteSoundID;

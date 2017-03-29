@@ -326,7 +326,7 @@ public:
 				}
 				if (r2 < 50)
 				{
-					me->HandleEmote(EMOTE_STATE_KNEEL);
+					me->HandleEmoteCommand(EMOTE_STATE_KNEEL);
 				}
 				if (r3 < 50)
 					me->CastSpell(me, SPELL_SPYING);

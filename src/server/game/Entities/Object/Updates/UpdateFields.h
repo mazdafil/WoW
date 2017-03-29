@@ -133,7 +133,7 @@ enum UnitFields
     UNIT_FIELD_PET_NAME_TIMESTAMP                          = OBJECT_END + 0x06A, // Size: 1, Flags: PUBLIC
     UNIT_FIELD_PETEXPERIENCE                               = OBJECT_END + 0x06B, // Size: 1, Flags: OWNER
     UNIT_FIELD_PETNEXTLEVELEXP                             = OBJECT_END + 0x06C, // Size: 1, Flags: OWNER
-	UNIT_DYNAMIC_FLAGS                                     = OBJECT_END + 0x0041, // Size: 1, Type: INT, Flags: DYNAMIC
+    UNIT_DYNAMIC_FLAGS                                     = OBJECT_END + 0x0041, // Size: 1, Type: INT, Flags: DYNAMIC  
     UNIT_MOD_CAST_SPEED                                    = OBJECT_END + 0x06D, // Size: 1, Flags: PUBLIC
     UNIT_MOD_CAST_HASTE                                    = OBJECT_END + 0x06E, // Size: 1, Flags: PUBLIC
     UNIT_FIELD_MOD_HASTE                                   = OBJECT_END + 0x06F, // Size: 1, Flags: PUBLIC
