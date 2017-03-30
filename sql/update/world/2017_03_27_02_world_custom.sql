@@ -1,0 +1,1 @@
+DELETE FROM `creature_queststarter` WHERE  `id`=197 AND `quest`=28762;
