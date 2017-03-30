@@ -1,0 +1,1 @@
+UPDATE `world`.`quest_template_addon` SET `PrevQuestID`='31139' WHERE  `ID`=28770;
