@@ -162,7 +162,8 @@ class TC_GAME_API Object
         virtual void RemoveFromWorld();
 
         ObjectGuid const& GetGUID() const { return GetGuidValue(OBJECT_FIELD_GUID); }
-        PackedGuid const& GetPackGUID() const { return m_PackGUID; }
+		uint32 GetGUIDLow() const { return GUID_LOPART(GetUInt64Value(0)); }
+		PackedGuid const& GetPackGUID() const { return m_PackGUID; }
         uint32 GetEntry() const { return GetUInt32Value(OBJECT_FIELD_ENTRY); }
         void SetEntry(uint32 entry) { SetUInt32Value(OBJECT_FIELD_ENTRY, entry); }
 
@@ -656,7 +657,7 @@ class TC_GAME_API WorldObject : public Object, public WorldLocation
         GameObject* SummonGameObject(uint32 entry, float x, float y, float z, float ang, G3D::Quat const& rot, uint32 respawnTime /* s */);
         Creature*   SummonTrigger(float x, float y, float z, float ang, uint32 dur, CreatureAI* (*GetAI)(Creature*) = NULL);
         void SummonCreatureGroup(uint8 group, std::list<TempSummon*>* list = NULL);
-
+		Creature*   FindRandomCreatureInRange(uint32 entry, float range, bool alive);
         Creature*   FindNearestCreature(uint32 entry, float range, bool alive = true) const;
         GameObject* FindNearestGameObject(uint32 entry, float range) const;
         GameObject* FindNearestGameObjectOfType(GameobjectTypes type, float range) const;

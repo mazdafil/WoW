@@ -2615,6 +2615,18 @@ std::vector<Creature*> WorldObject::FindNearestCreatures(uint32 entry, float ran
     return returnList;
 }
 
+Creature* WorldObject::FindRandomCreatureInRange(uint32 entry, float range, bool alive)
+{
+    Creature* creature = nullptr;
+    std::list<Creature*> cList = FindNearestCreatures(entry, range);
+    if (cList.empty())
+        return NULL;
+
+    uint32 rol = urand(0, cList.size() - 1);
+    std::list<Creature*>::const_iterator itr = cList.begin();
+    std::advance(itr, rol);
+    return *itr;
+}
 
 GameObject* WorldObject::FindNearestGameObject(uint32 entry, float range) const
 {

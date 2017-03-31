@@ -30,6 +30,7 @@ inline uint16 MAKE_PAIR16(uint8 l, uint8 h);
 inline uint32 MAKE_PAIR32(uint16 l, uint16 h);
 inline uint16 PAIR32_HIPART(uint32 x);
 inline uint16 PAIR32_LOPART(uint32 x);
+inline uint32 GUID_LOPART(uint64 x);
 
 uint64 MAKE_PAIR64(uint32 l, uint32 h)
 {
@@ -64,6 +65,12 @@ uint16 PAIR32_HIPART(uint32 x)
 uint16 PAIR32_LOPART(uint32 x)
 {
     return (uint16)(x & 0x0000FFFF);
+}
+
+uint32 GUID_LOPART(uint64 x)
+{
+    // _GUID_LOPART_3 and _GUID_LOPART_2 were both equal to PAIR64_LOPART
+    return PAIR64_LOPART(x);
 }
 
 #endif
