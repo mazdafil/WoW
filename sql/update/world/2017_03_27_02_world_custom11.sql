@@ -17,7 +17,7 @@ UPDATE creature_template SET ScriptName = 'npc_defias_sentinel_hill' WHERE (entr
 UPDATE creature_template SET ScriptName = 'npc_riverpaw_westfall' WHERE (entry = 124) OR (entry = 452) OR (entry = 501);
 UPDATE creature_template SET ScriptName = 'npc_ripsnarl_sentinel_hill' WHERE entry = 42635;
 UPDATE creature_template SET ScriptName = 'npc_agent_kearnen' WHERE entry = 7024;
-UPDATE item_script_names_template SET ScriptName = 'item_potion_of_shrouding' WHERE id = 58112;
+UPDATE item_script_names SET ScriptName = 'item_potion_of_shrouding' WHERE id = 58112;
 UPDATE creature_template SET ScriptName = 'npc_helix_gearbreaker' WHERE entry = 42655;
 UPDATE creature_template SET ScriptName = 'npc_van_cleef_dummy' WHERE entry = 42679;
 UPDATE creature_template SET ScriptName = 'npc_moonbrook_player_trigger_43515' WHERE entry = 43515;
