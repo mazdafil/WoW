@@ -16197,7 +16197,7 @@ void Player::AreaExploredOrEventHappens(uint32 questId)
             TC_LOG_ERROR("entities.player.quest", "Player::AreaExploredOrEventHappens:Deprecated function called for quest %u", questId);
             /** @todo
             This function was previously used for area triggers but now those are a part of quest objective system
-            Currently this function is used to complete quests with no objectives (needs verifying) so probably rename it?
+            Currently this function is used to complete quests with no objectives (needs verifying) so probably rename it? 
 
             QuestStatusData& q_status = m_QuestStatus[questId];
 

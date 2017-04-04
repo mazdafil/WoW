@@ -1121,6 +1121,37 @@ public:
     };
 };
 
+/*######
+## at_fargodeep_mine
+######*/
+
+enum at_fargodeep_mine
+{
+    QUEST_FARGODEEP_MINE = 62,
+	CREATURE_FARGODEEP_MINE = 119703,
+};
+
+class AreaTrigger_at_fargodeep_mine : public AreaTriggerScript
+{
+    public:
+
+        AreaTrigger_at_fargodeep_mine()
+            : AreaTriggerScript("at_fargodeep_mine")
+        {
+        }
+
+        bool OnTrigger(Player* player, AreaTriggerEntry const* /*areaTrigger*/, bool /*entered*/) override
+        {
+            if (player->GetQuestStatus(QUEST_FARGODEEP_MINE) == QUEST_STATUS_INCOMPLETE)
+			{
+                player->KilledMonsterCredit(CREATURE_FARGODEEP_MINE);
+				player->CompleteQuest(QUEST_FARGODEEP_MINE);
+			}
+
+            return true;
+        }
+};
+
 void AddSC_elwynn_forest()
 {
     // new npc_henze_faulk();
@@ -1136,4 +1167,5 @@ void AddSC_elwynn_forest()
 	new npc_princess();
     new npc_marshal_mcbride_197();
     new npc_hogger_448();
+	new AreaTrigger_at_fargodeep_mine();
 }
