@@ -1,5 +1,5 @@
 DELETE FROM `creature_template` WHERE entry = 119704;
-INSERT INTO `creature_template` (`entry`, `modelid1`, `modelid2`, `name`, `femaleName`, `subname`, `IconName`, `type`, `type_flags`, `VerifiedBuild`) VALUES ('119703', '1126', '75463', 'Scout through the Jasperlode Mine done.', ' ', '', '', '10', '1024', '23420');
+INSERT INTO `creature_template` (`entry`, `modelid1`, `modelid2`, `name`, `femaleName`, `subname`, `IconName`, `type`, `type_flags`, `VerifiedBuild`) VALUES ('119704', '1126', '75463', 'Scout through the Jasperlode Mine done.', ' ', '', '', '10', '1024', '23420');
 DELETE FROM `creature_template_locale` WHERE entry = 119704;
 INSERT INTO `creature_template_locale` (`entry`, `locale`, `Name`, `NameAlt`, `TitleAlt`) VALUES ('119704', 'ruRU', 'Разведка в Яшмовой шахте проведена.', NULL, NULL);
 UPDATE `quest_template` SET Flags = 8 WHERE ID = 76;
