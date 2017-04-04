@@ -1,0 +1,1 @@
+UPDATE `broadcast_text_locale` SET `FemaleText_lang`='Генерал Маркус Джонатан!' WHERE  `ID`=47005 AND `locale`='ruRU';

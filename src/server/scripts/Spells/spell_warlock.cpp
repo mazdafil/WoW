@@ -67,7 +67,7 @@ enum WarlockSpells
     SPELL_WARLOCK_NETHER_WARD                       = 91711,
     SPELL_WARLOCK_NETHER_TALENT                     = 91713,
     SPELL_WARLOCK_RAIN_OF_FIRE                      = 5740,
- +  SPELL_WARLOCK_RAIN_OF_FIRE_DAMAGE               = 42223,
+    SPELL_WARLOCK_RAIN_OF_FIRE_DAMAGE               = 42223,
 	SPELL_WARLOCK_SHADOW_TRANCE                     = 17941,
     SPELL_WARLOCK_SIPHON_LIFE_HEAL                  = 63106,
     SPELL_WARLOCK_SHADOW_WARD                       = 6229,

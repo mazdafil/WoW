@@ -1,0 +1,17 @@
+DELETE FROM `creature_text` WHERE `entry`=46942 AND `groupid`=0 AND `id`=0;
+INSERT INTO `creature_text` VALUES (46942, 0, 0, 'Hold your blade, adventurer!', 14, 0, 100, 0, 0, 0, 47004, 0, '');
+DELETE FROM `creature_text` WHERE `entry`=46942 AND `groupid`=1 AND `id`=0;
+INSERT INTO `creature_text` VALUES (46942, 1, 0, 'This beast leads the Riverpaw gnoll gang and may be the key to ending gnoll aggression in Elwynn!', 12, 0, 100, 0, 0, 0, 47007, 0, '');
+DELETE FROM `creature_text` WHERE `entry`=46942 AND `groupid`=2 AND `id`=0;
+INSERT INTO `creature_text` VALUES (46942, 2, 0, 'We\'re taking him into custody in the name of King Varian Wrynn.', 12, 0, 100, 0, 0, 0, 47008, 0, '');
+DELETE FROM `creature_text` WHERE `entry`=46942 AND `groupid`=3 AND `id`=0;
+INSERT INTO `creature_text` VALUES (46942, 3, 0, 'Take us to the Stockades, Andromath.', 12, 0, 100, 0, 0, 0, 47009, 0, '');
+DELETE FROM `creature_text` WHERE `entry`=46943 AND `groupid`=0 AND `id`=0;
+INSERT INTO `creature_text` VALUES (46943, 0, 0, 'WoW!', 14, 0, 100, 0, 0, 0, 47006, 0, '');
+DELETE FROM `creature_text` WHERE `entry`=46943 AND `groupid`=1 AND `id`=0;
+INSERT INTO `creature_text` VALUES (46943, 1, 0, 'General Jonathan Marcus!', 14, 0, 100, 0, 0, 0, 47005, 0, '');
+DELETE FROM `creature` WHERE `id`=46940;
+DELETE FROM `creature` WHERE `id`=46941;
+DELETE FROM `creature` WHERE `id`=46942;
+DELETE FROM `creature` WHERE `id`=46943;
+UPDATE `creature_template` SET AIName = '' WHERE entry = 448;
