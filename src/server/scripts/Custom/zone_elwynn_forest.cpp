@@ -1152,6 +1152,37 @@ class AreaTrigger_at_fargodeep_mine : public AreaTriggerScript
         }
 };
 
+/*######
+## at_jasperlode_mine
+######*/
+
+enum at_jasperlode_mine
+{
+    QUEST_JASPERLODE_MINE = 76,
+	CREATURE_JASPERLODE_MINE = 119704,
+};
+
+class AreaTrigger_at_jasperlode_mine : public AreaTriggerScript
+{
+    public:
+
+        AreaTrigger_at_jasperlode_mine()
+            : AreaTriggerScript("at_jasperlode_mine")
+        {
+        }
+
+        bool OnTrigger(Player* player, AreaTriggerEntry const* /*areaTrigger*/, bool /*entered*/) override
+        {
+            if (player->GetQuestStatus(QUEST_JASPERLODE_MINE) == QUEST_STATUS_INCOMPLETE)
+			{
+                player->KilledMonsterCredit(CREATURE_JASPERLODE_MINE);
+				player->CompleteQuest(QUEST_JASPERLODE_MINE);
+			}
+
+            return true;
+        }
+};
+
 void AddSC_elwynn_forest()
 {
     // new npc_henze_faulk();
@@ -1168,4 +1199,5 @@ void AddSC_elwynn_forest()
     new npc_marshal_mcbride_197();
     new npc_hogger_448();
 	new AreaTrigger_at_fargodeep_mine();
+	new AreaTrigger_at_jasperlode_mine();
 }
