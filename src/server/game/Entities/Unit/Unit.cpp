@@ -4234,11 +4234,6 @@ AuraEffect* Unit::GetAuraEffect(AuraType type, SpellFamilyNames family, flag128 
     return NULL;
 }
 
-AuraEffect* Unit::GetDummyAuraEffect(SpellFamilyNames name, uint32 iconId, uint8 effIndex) const
-{
-    return GetAuraEffect(SPELL_AURA_DUMMY, name, iconId, effIndex);
-}
-
 AuraApplication * Unit::GetAuraApplication(uint32 spellId, ObjectGuid casterGUID, ObjectGuid itemCasterGUID, uint32 reqEffMask, AuraApplication * except) const
 {
     AuraApplicationMapBounds range = m_appliedAuras.equal_range(spellId);
@@ -7860,7 +7855,7 @@ float Unit::SpellDamagePctDone(Unit* victim, SpellInfo const* spellProto, Damage
             // Ice Lance (no unique family flag)
             if (spellProto->Id == 228598)
                 if (victim->HasAuraState(AURA_STATE_FROZEN, spellProto, this))
-                   DoneTotalMod *= 3.0f;
+                DoneTotalMod *= 3.0f;
             break;
         case SPELLFAMILY_PRIEST:
             // Smite
@@ -7915,7 +7910,6 @@ uint32 Unit::SpellDamageBonusTaken(Unit* caster, SpellInfo const* spellProto, ui
     if (AuraEffect const* cheatDeath = GetAuraEffect(45182, EFFECT_0))
         if (cheatDeath->GetMiscValue() & SPELL_SCHOOL_MASK_NORMAL)
             AddPct(TakenTotalMod, cheatDeath->GetAmount());
- 
     // Spells with SPELL_ATTR4_FIXED_DAMAGE should only benefit from mechanic damage mod auras.
     if (!spellProto->HasAttribute(SPELL_ATTR4_FIXED_DAMAGE))
     {
@@ -8109,13 +8103,6 @@ float Unit::GetUnitSpellCriticalChance(Unit* victim, SpellInfo const* spellProto
                 // Custom crit by class
                 switch (spellProto->SpellFamilyName)
                 {
-                    case SPELLFAMILY_DRUID:
-                        // Improved Faerie Fire
-                        if (victim->HasAuraState(AURA_STATE_FAERIE_FIRE))
-                            if (AuraEffect const* aurEff = GetDummyAuraEffect(SPELLFAMILY_DRUID, 109, 0))
-                                crit_chance += aurEff->GetAmount();
-
-                        break;
                     case SPELLFAMILY_ROGUE:
                         // Shiv-applied poisons can't crit
                         if (FindCurrentSpellBySpellId(5938))
@@ -8153,7 +8140,7 @@ float Unit::GetUnitSpellCriticalChance(Unit* victim, SpellInfo const* spellProto
             break;
         }
         case SPELL_DAMAGE_CLASS_MELEE:
-            /// Intentional fallback. Calculate critical strike chance for both Ranged and Melee spells
+        /// Intentional fallback. Calculate critical strike chance for both Ranged and Melee spells
         case SPELL_DAMAGE_CLASS_RANGED:
         {
             if (victim)
@@ -12957,11 +12944,9 @@ void Unit::Kill(Unit* victim, bool durabilityLoss)
             victim->RemoveAllAurasOnDeath();
             // restore for use at real death
             victim->SetUInt32Value(PLAYER_SELF_RES_SPELL, ressSpellId);
-
                 // FORM_SPIRIT_OF_REDEMPTION and related auras
             victim->CastSpell(victim, 27827, true, NULL, spiritOfRedemptionEffect);
             spiritOfRedemption = true;
-            break;
         }
     }
 

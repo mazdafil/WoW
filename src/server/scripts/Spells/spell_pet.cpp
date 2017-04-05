@@ -1455,13 +1455,14 @@ public:
             {
                 if (pet->IsGuardian())
                 {
-                    float ownerBonus = float(owner->GetStat(STAT_STAMINA)) * 0.3f;
+                    if (Unit* owner = pet->GetOwner())
+                    {
+                        float ownerBonus = float(owner->GetStat(STAT_STAMINA)) * 0.3f;
                         amount += ownerBonus;
                     }
                 }
             }
         }
-
         void ApplyEffect(AuraEffect const* /* aurEff */, AuraEffectHandleModes /*mode*/)
         {
             if (Unit* pet = GetUnitOwner())

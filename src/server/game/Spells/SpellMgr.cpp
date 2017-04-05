@@ -186,7 +186,7 @@ DiminishingGroup GetDiminishingReturnsGroupForSpell(SpellInfo const* spellproto)
                 return DIMINISHING_STUN;
 
             // Incapacitating Roar -- 99, no flags on the stun, 14
-            if (spellproto->SpellFamilyFlags[1] 0x1)
+            if (spellproto->SpellFamilyFlags[1] & 0x1)
                 return DIMINISHING_INCAPACITATE;
 
             // Cyclone -- 33786
@@ -204,7 +204,7 @@ DiminishingGroup GetDiminishingReturnsGroupForSpell(SpellInfo const* spellproto)
             if (spellproto->SpellFamilyFlags[0] & 0x200)
                 return DIMINISHING_ROOT;
             // Mass Entanglement -- 102359
-            if (spellproto->SpellFamilyFlags[2] 0x4)
+            if (spellproto->SpellFamilyFlags[2] & 0x4)
                 return DIMINISHING_ROOT;
 
             // Faerie Fire -- 770, 20 seconds in PvP (6.0)
