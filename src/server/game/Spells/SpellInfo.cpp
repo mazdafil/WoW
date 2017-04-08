@@ -1696,7 +1696,7 @@ SpellCastResult SpellInfo::CheckShapeshift(uint32 form) const
 
 SpellCastResult SpellInfo::CheckLocation(uint32 map_id, uint32 zone_id, uint32 area_id, Player const* player) const
 {
-    // normal case
+   // normal case
     if (RequiredAreasID > 0)
     {
         bool found = false;

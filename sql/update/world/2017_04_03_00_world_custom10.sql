@@ -1,0 +1,17 @@
+DELETE FROM `quest_objectives` WHERE QuestID = 26228;
+INSERT INTO `quest_objectives` VALUES (289475, 26228, 0, 0, 42492, 1, 1, 0, 0, '', 23360);
+INSERT INTO `quest_objectives_locale` VALUES (289475, 'ruRU', 26228, 0, 'Живи и радуйся', 23360);
+INSERT INTO `quest_objectives_locale` VALUES (252154, 'ruRU', 76, 0, 'Проведите разведку в Яшмовой шахте.', 23360);
+UPDATE `creature` SET spawntimesecs = 500 WHERE id = 1236;
+UPDATE `creature` SET spawntimesecs = 7200 WHERE id = 1424;
+DELETE FROM `gameobject_template` WHERE `entry`=203957;
+INSERT INTO `gameobject_template` VALUES (203957, 8, 0, 'Jangolode Mine Spell Focus', '', '', '', 1, 1672, 30, 0, 1, 26228, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', -18019);
+DELETE FROM `gameobject_template` WHERE `entry`=300206;
+INSERT INTO `gameobject_template` VALUES (300206, 8, 299, 'you to be at the end of the Jangolode Mine.', '', '', '', 1, 1672, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', 0);
+DELETE FROM `gameobject` WHERE `guid`=301115;
+INSERT INTO `gameobject` VALUES (301115, 300206, 0, 0, 0, 1, 0, 0, -9848.62, 1390.5, 38.0731, 3.92641, 0, 0, 0.92399, -0.382416, 300, 255, 1, '', 0);
+DELETE FROM `gameobject` WHERE `guid`=301114;
+INSERT INTO `gameobject` VALUES (301114, 300206, 0, 0, 0, 1, 0, 0, -9977.34, 1009.86, 31.4688, 0.321414, 0.219706, -0.685921, 0.160016, 0.675009, 300, 255, 1, '', 0);
+DELETE FROM `gameobject` WHERE `guid`=301113;
+INSERT INTO `gameobject` VALUES (301113, 203957, 0, 0, 0, 1, 0, 0, -9845.54, 1397.84, 37.178, 0.885095, 0, 0, 0.428243, 0.903664, 300, 0, 1, '', 0);
+UPDATE `creature_template` SET VehicleId = 899 WHERE entry = 42500;
