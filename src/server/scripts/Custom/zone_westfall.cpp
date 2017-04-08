@@ -369,8 +369,7 @@ public:
 				case EVENT_CHECK_FOR_PLAYER:
 				{
 					if (Creature* feed = me->FindNearestCreature(NPC_WESTFALL_STEW, 10.0f, true))
-						if (Unit* charm = feed->GetCharmerOrOwner())
-							if (Player* player = charm->ToPlayer())
+						if (Player* player = feed->GetCharmerOrOwner()->ToPlayer())
 							{
 								player->KilledMonsterCredit(NPC_WESTFALL_STEW);
 								me->RemoveAllAuras();
@@ -516,8 +515,7 @@ public:
                 case EVENT_CHECK_FOR_PLAYER:
                 {
                     if (Creature* feed = me->FindNearestCreature(NPC_WESTFALL_STEW, 10.0f, true))
-                        if (Unit* charm = feed->GetCharmerOrOwner())
-                            if (Player* player = charm->ToPlayer())
+                        if (Player* player = feed->GetCharmerOrOwner()->ToPlayer())
                             {
                                 player->KilledMonsterCredit(NPC_WESTFALL_STEW);
                                 me->RemoveAllAuras();
@@ -664,8 +662,7 @@ public:
                 case EVENT_CHECK_FOR_PLAYER:
                 {
                     if (Creature* feed = me->FindNearestCreature(NPC_WESTFALL_STEW, 10.0f, true))
-                        if (Unit* charm = feed->GetCharmerOrOwner())
-                            if (Player* player = charm->ToPlayer())
+                        if (Player* player = feed->GetCharmerOrOwner()->ToPlayer())
                             {
                                 player->KilledMonsterCredit(NPC_WESTFALL_STEW);
                                 me->RemoveAllAuras();
@@ -811,8 +808,7 @@ public:
                 case EVENT_CHECK_FOR_PLAYER:
                 {
                     if (Creature* feed = me->FindNearestCreature(NPC_WESTFALL_STEW, 10.0f, true))
-                        if (Unit* charm = feed->GetCharmerOrOwner())
-                            if (Player* player = charm->ToPlayer())
+                        if (Player* player = feed->GetCharmerOrOwner()->ToPlayer())
                             {
                                 player->KilledMonsterCredit(NPC_WESTFALL_STEW);
                                 me->RemoveAllAuras();
@@ -4127,6 +4123,57 @@ public:
     };
 };
 
+class item_westfall_stew : public ItemScript
+{
+public:
+    item_westfall_stew() : ItemScript("item_westfall_stew") { }
+
+    bool OnUse(Player* player, Item* /*item*/, SpellCastTargets const& targets, ObjectGuid /*castId*/) override
+    {
+        if (Creature* feed = player->FindNearestCreature(NPC_WESTFALL_STEW, 10.0f, true))
+		if (Creature* homeless = player->FindNearestCreature(NPC_WEST_PLAINS_DRIFTERS, 10.0f, true))
+                        {
+                                player->KilledMonsterCredit(NPC_WESTFALL_STEW);
+                                homeless->RemoveAllAuras();
+                                //me->SetByteValue(UNIT_FIELD_BYTES_1, 0, UNIT_STAND_STATE_STAND);
+                                homeless->HandleEmoteCommand(EMOTE_STATE_USE_STANDING);
+                                homeless->AI()->Talk(11);
+                                homeless->DespawnOrUnsummon(5000);
+								
+                        }
+		if (Creature* homeless = player->FindNearestCreature(NPC_TRANSIENT, 10.0f, true))
+                        {
+                                player->KilledMonsterCredit(NPC_WESTFALL_STEW);
+                                homeless->RemoveAllAuras();
+                                //me->SetByteValue(UNIT_FIELD_BYTES_1, 0, UNIT_STAND_STATE_STAND);
+                                homeless->HandleEmoteCommand(EMOTE_STATE_USE_STANDING);
+                                homeless->AI()->Talk(11);
+                                homeless->DespawnOrUnsummon(5000);
+								
+                        }
+	    if (Creature* homeless = player->FindNearestCreature(NPC_HOMELESS_STORMWIND_CITIZEN_42384, 10.0f, true))
+                        {
+                                player->KilledMonsterCredit(NPC_WESTFALL_STEW);
+                                homeless->RemoveAllAuras();
+                                //me->SetByteValue(UNIT_FIELD_BYTES_1, 0, UNIT_STAND_STATE_STAND);
+                                homeless->HandleEmoteCommand(EMOTE_STATE_USE_STANDING);
+                                homeless->AI()->Talk(11);
+                                homeless->DespawnOrUnsummon(5000);
+								
+                        }
+		if (Creature* homeless = player->FindNearestCreature(NPC_HOMELESS_STORMWIND_CITIZEN_42386, 10.0f, true))
+                        {
+                                player->KilledMonsterCredit(NPC_WESTFALL_STEW);
+                                homeless->RemoveAllAuras();
+                                //me->SetByteValue(UNIT_FIELD_BYTES_1, 0, UNIT_STAND_STATE_STAND);
+                                homeless->HandleEmoteCommand(EMOTE_STATE_USE_STANDING);
+                                homeless->AI()->Talk(11);
+                                homeless->DespawnOrUnsummon(5000);
+								
+                        }
+		return false;
+	}
+};
 
 void AddSC_westfall()
 {
@@ -4166,4 +4213,5 @@ void AddSC_westfall()
     new npc_glubtok_42755();
     new npc_defias_blackguard_42769();
     new npc_thor_523;
+	new item_westfall_stew();
 }
