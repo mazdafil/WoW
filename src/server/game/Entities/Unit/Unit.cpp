@@ -3431,7 +3431,7 @@ void Unit::_RemoveNoStackAurasDueToAura(Aura* aura)
         {
             Unit* caster = aura->GetCaster();
             if (caster && caster->GetTypeId() == TYPEID_PLAYER)
-                Spell::SendCastResult(caster->ToPlayer(), aura->GetSpellInfo(), aura->GetSpellXSpellVisualId(), aura->GetCastGUID(), SPELL_FAILED_AURA_BOUNCED);
+                Spell::SendCastResult(caster->ToPlayer(), aura->GetSpellInfo(), aura->GetCastGUID(), SPELL_FAILED_AURA_BOUNCED);
         }
 
         aura->Remove();

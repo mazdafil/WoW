@@ -49,12 +49,13 @@ class item_only_for_flight : public ItemScript
 public:
     item_only_for_flight() : ItemScript("item_only_for_flight") { }
 
-    bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/, ObjectGuid castId) override
+    bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/) override
     {
         uint32 itemId = item->GetEntry();
         bool disabled = false;
 
         //for special scripts
+		ObjectGuid m_castId = player->GetGUID();
         switch (itemId)
         {
             case 24538:
@@ -67,7 +68,7 @@ public:
                 break;
             case 34475:
                 if (SpellInfo const* spellInfo = sSpellMgr->GetSpellInfo(SPELL_ARCANE_CHARGES))
-                    Spell::SendCastResult(player, spellInfo, 0, castId, SPELL_FAILED_NOT_ON_GROUND);
+                    Spell::SendCastResult(player, spellInfo, m_castId, SPELL_FAILED_NOT_ON_GROUND);
                 break;
         }
 
@@ -90,7 +91,7 @@ class item_nether_wraith_beacon : public ItemScript
 public:
     item_nether_wraith_beacon() : ItemScript("item_nether_wraith_beacon") { }
 
-    bool OnUse(Player* player, Item* /*item*/, SpellCastTargets const& /*targets*/, ObjectGuid /*castId*/) override
+    bool OnUse(Player* player, Item* /*item*/, SpellCastTargets const& /*targets*/) override
     {
         if (player->GetQuestStatus(10832) == QUEST_STATUS_INCOMPLETE)
         {
@@ -113,7 +114,7 @@ class item_gor_dreks_ointment : public ItemScript
 public:
     item_gor_dreks_ointment() : ItemScript("item_gor_dreks_ointment") { }
 
-    bool OnUse(Player* player, Item* item, SpellCastTargets const& targets, ObjectGuid /*castId*/) override
+    bool OnUse(Player* player, Item* item, SpellCastTargets const& targets) override
     {
         if (targets.GetUnitTarget() && targets.GetUnitTarget()->GetTypeId() == TYPEID_UNIT &&
             targets.GetUnitTarget()->GetEntry() == 20748 && !targets.GetUnitTarget()->HasAura(32578))
@@ -133,7 +134,7 @@ class item_incendiary_explosives : public ItemScript
 public:
     item_incendiary_explosives() : ItemScript("item_incendiary_explosives") { }
 
-    bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/, ObjectGuid /*castId*/) override
+    bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/) override
     {
         if (player->FindNearestCreature(26248, 15) || player->FindNearestCreature(26249, 15))
             return false;
@@ -223,7 +224,7 @@ class item_pile_fake_furs : public ItemScript
 public:
     item_pile_fake_furs() : ItemScript("item_pile_fake_furs") { }
 
-    bool OnUse(Player* player, Item* /*item*/, SpellCastTargets const& /*targets*/, ObjectGuid /*castId*/) override
+    bool OnUse(Player* player, Item* /*item*/, SpellCastTargets const& /*targets*/) override
     {
         GameObject* go = NULL;
         for (uint8 i = 0; i < CaribouTrapsNum; ++i)
@@ -268,15 +269,16 @@ class item_petrov_cluster_bombs : public ItemScript
 public:
     item_petrov_cluster_bombs() : ItemScript("item_petrov_cluster_bombs") { }
 
-    bool OnUse(Player* player, Item* /*item*/, SpellCastTargets const& /*targets*/, ObjectGuid castId) override
+    bool OnUse(Player* player, Item* /*item*/, SpellCastTargets const& /*targets*/) override
     {
+		ObjectGuid castId = player->GetGUID();
         if (player->GetZoneId() != ZONE_ID_HOWLING)
             return false;
 
         if (!player->GetTransport() || player->GetAreaId() != AREA_ID_SHATTERED_STRAITS)
         {
             if (const SpellInfo* spellInfo = sSpellMgr->GetSpellInfo(SPELL_PETROV_BOMB))
-                Spell::SendCastResult(player, spellInfo, 0, castId, SPELL_FAILED_NOT_HERE);
+                Spell::SendCastResult(player, spellInfo, castId, SPELL_FAILED_NOT_HERE);
 
             return true;
         }
@@ -332,7 +334,7 @@ class item_dehta_trap_smasher : public ItemScript
 public:
     item_dehta_trap_smasher() : ItemScript("item_dehta_trap_smasher") { }
 
-    bool OnUse(Player* player, Item* /*item*/, SpellCastTargets const& /*targets*/, ObjectGuid /*castId*/) override
+    bool OnUse(Player* player, Item* /*item*/, SpellCastTargets const& /*targets*/) override
     {
         if (player->GetQuestStatus(QUEST_CANNOT_HELP_THEMSELVES) != QUEST_STATUS_INCOMPLETE)
             return false;
@@ -368,7 +370,7 @@ class item_trident_of_nazjan : public ItemScript
 public:
     item_trident_of_nazjan() : ItemScript("item_Trident_of_Nazjan") { }
 
-    bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/, ObjectGuid /*castId*/) override
+    bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/) override
     {
         if (player->GetQuestStatus(QUEST_THE_EMISSARY) == QUEST_STATUS_INCOMPLETE)
         {
@@ -395,7 +397,7 @@ class item_captured_frog : public ItemScript
 public:
     item_captured_frog() : ItemScript("item_captured_frog") { }
 
-    bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/, ObjectGuid /*castId*/) override
+    bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/) override
     {
         if (player->GetQuestStatus(QUEST_THE_PERFECT_SPIES) == QUEST_STATUS_INCOMPLETE)
         {

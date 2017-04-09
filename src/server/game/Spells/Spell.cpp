@@ -3892,13 +3892,12 @@ void Spell::SendPetCastResult(SpellCastResult result)
     owner->ToPlayer()->SendDirectMessage(petCastFailed.Write());
 }
 
-void Spell::SendCastResult(Player* caster, SpellInfo const* spellInfo, uint32 spellVisual, ObjectGuid cast_count, SpellCastResult result, SpellCustomErrors customError /*= SPELL_CUSTOM_ERROR_NONE*/, uint32* misc /*= nullptr*/)
+void Spell::SendCastResult(Player* caster, SpellInfo const* spellInfo, ObjectGuid cast_count, SpellCastResult result, SpellCustomErrors customError /*= SPELL_CUSTOM_ERROR_NONE*/, uint32* misc /*= nullptr*/)
 {
     if (result == SPELL_CAST_OK)
         return;
 
     WorldPackets::Spells::CastFailed packet;
-    packet.SpellXSpellVisualID = spellVisual;
     FillSpellCastFailedArgs(packet, cast_count, spellInfo, result, customError, misc, caster);
     caster->GetSession()->SendPacket(packet.Write());
 }

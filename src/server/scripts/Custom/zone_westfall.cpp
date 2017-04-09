@@ -2436,7 +2436,7 @@ class item_potion_of_shrouding : public ItemScript
 public:
     item_potion_of_shrouding() : ItemScript("item_potion_of_shrouding") { }
 
-    bool OnUse(Player* player, Item* /*item*/, SpellCastTargets const& targets, ObjectGuid /*castId*/) override
+    bool OnUse(Player* player, Item* /*item*/, SpellCastTargets const& targets) override
     {
         Creature* helixGear = player->FindNearestCreature(NPC_HELIX_GEARBREAKER, 50.0f);
         Creature* helixOar = player->FindNearestCreature(NPC_HELIXS_LUMBERING_OAF, 50.0f);
@@ -4128,7 +4128,7 @@ class item_westfall_stew : public ItemScript
 public:
     item_westfall_stew() : ItemScript("item_westfall_stew") { }
 
-    bool OnUse(Player* player, Item* /*item*/, SpellCastTargets const& targets, ObjectGuid /*castId*/) override
+    bool OnUse(Player* player, Item* /*item*/, SpellCastTargets const& targets) override
     {
         if (Creature* feed = player->FindNearestCreature(NPC_WESTFALL_STEW, 10.0f, true))
 		if (Creature* homeless = player->FindNearestCreature(NPC_WEST_PLAINS_DRIFTERS, 10.0f, true))

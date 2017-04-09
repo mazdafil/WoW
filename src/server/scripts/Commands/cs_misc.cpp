@@ -1017,7 +1017,7 @@ public:
             if (Player* caster = handler->GetSession()->GetPlayer())
             {
                 ObjectGuid castId = ObjectGuid::Create<HighGuid::Cast>(SPELL_CAST_SOURCE_NORMAL, player->GetMapId(), SPELL_UNSTUCK_ID, player->GetMap()->GenerateLowGuid<HighGuid::Cast>());
-                Spell::SendCastResult(caster, spellInfo, SPELL_UNSTUCK_VISUAL, castId, SPELL_FAILED_CANT_DO_THAT_RIGHT_NOW);
+                Spell::SendCastResult(caster, spellInfo, castId, SPELL_FAILED_CANT_DO_THAT_RIGHT_NOW);
             }
 
             return false;

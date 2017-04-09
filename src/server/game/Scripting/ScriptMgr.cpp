@@ -1611,13 +1611,13 @@ bool ScriptMgr::OnQuestAccept(Player* player, Item* item, Quest const* quest)
     return tmpscript->OnQuestAccept(player, item, quest);
 }
 
-bool ScriptMgr::OnItemUse(Player* player, Item* item, SpellCastTargets const& targets, ObjectGuid castId)
+bool ScriptMgr::OnItemUse(Player* player, Item* item, SpellCastTargets const& targets)
 {
     ASSERT(player);
     ASSERT(item);
 
     GET_SCRIPT_RET(ItemScript, item->GetScriptId(), tmpscript, false);
-    return tmpscript->OnUse(player, item, targets, castId);
+    return tmpscript->OnUse(player, item, targets);
 }
 
 bool ScriptMgr::OnItemExpire(Player* player, ItemTemplate const* proto)
