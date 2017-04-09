@@ -4736,7 +4736,104 @@ void Spell::HandleEffects(Unit* pUnitTarget, Item* pItemTarget, GameObject* pGOT
 
 SpellCastResult Spell::CheckCast(bool strict)
 {
-    // check death state
+    enum eCheckCast
+    {
+        NPC_KRENNAN_ARANAS = 35753,
+        SPELL_RESCUE_KRENNAN_ARANAS = 68219,
+    };
+
+    Unit* Target = m_targets.GetUnitTarget();
+
+    switch (m_spellInfo->Id)
+    {
+    case 52781:
+        if (Player* player = m_caster->ToPlayer())
+            if (player->GetQuestStatus(12720) == QUEST_STATUS_INCOMPLETE)
+                return SPELL_CAST_OK;
+        break;
+    case 68219:
+        if (Unit* unit = this->GetOriginalCaster())
+            if (Vehicle* horse = unit->GetVehicle())
+                if (!horse->HasEmptySeat(0))
+                    if (Player* player = horse->GetPassenger(0)->ToPlayer())
+                        if (Creature* krennan = player->FindNearestCreature(35753, 5.0f))
+                                return SPELL_CAST_OK;
+        break;
+	// control ettin
+    case 80704:
+    {
+        Creature* ettin = m_caster->FindNearestCreature(43094, 10.0f);
+        if (!ettin)
+            return SPELL_FAILED_OUT_OF_RANGE;
+        break;
+    }
+    // Anshal Nurture.
+    case 85422:
+    case 85425:
+    case 85429:
+        return SPELL_CAST_OK;
+    }
+  
+    if (m_spellInfo->Id == 30449 && Target)          // Spellsteal Check
+    {
+        if (Target != m_caster && !Target->IsFriendlyTo(m_caster))
+        {
+            int SpellSteal = 0;
+            Unit::AuraMap const& auras = Target->GetOwnedAuras();
+            for (Unit::AuraMap::const_iterator itr = auras.begin(); itr != auras.end(); ++itr)
+            {
+                Aura * aura = itr->second;
+                AuraApplication * aurApp = aura->GetApplicationOfTarget(Target->GetGUID());
+                if (!aurApp)
+                    continue;
+                if ((1 << aura->GetSpellInfo()->Dispel))
+                {
+                    if (!aurApp->IsPositive() || aura->IsPassive() || aura->GetSpellInfo()->AttributesEx4 & SPELL_ATTR4_NOT_STEALABLE)
+                        continue;
+                    bool dispel_charges = aura->GetSpellInfo()->AttributesEx7 & SPELL_ATTR7_DISPEL_CHARGES;
+                    uint8 charges = dispel_charges ? aura->GetCharges() : aura->GetStackAmount();
+                    if (charges > 0)
+                        if (aura->GetDuration() > 0)          // If spell has a duration
+                            if (aura->GetSpellInfo()->Dispel == DISPEL_MAGIC)          // If spell type is magic
+                                ++SpellSteal;
+                }
+            }
+            if (SpellSteal == 0)
+                return SPELL_FAILED_NOTHING_TO_STEAL;
+        }
+    }
+
+    if (m_spellInfo->Id == 527 && Target) // Priest dispel check
+    {
+        uint8 dispel = 0;
+        Unit::AuraMap const& auras = Target->GetOwnedAuras();
+        for (Unit::AuraMap::const_iterator itr = auras.begin(); itr != auras.end(); ++itr)
+            if (Aura * aura = itr->second)
+            {
+                AuraApplication * aurApp = aura->GetApplicationOfTarget(Target->GetGUID());
+                if (!aurApp)
+                    continue;
+
+                if ((Target->IsFriendlyTo(m_caster) && aurApp->IsPositive()) || (!Target->IsFriendlyTo(m_caster) && !aurApp->IsPositive()))
+                    continue;
+
+                if (aura->GetDuration() > 0)          // If spell has a duration
+                    if (aura->GetSpellInfo()->Dispel == DISPEL_MAGIC)          // If spell type is magic
+                        ++dispel;
+            }
+        if (dispel == 0)
+            return SPELL_FAILED_NOTHING_TO_DISPEL;
+    }
+
+    // pal immune check
+    if (m_spellInfo->Id == 633 || m_spellInfo->Id == 642 || m_spellInfo->Id == 1022)
+        if ((Target && Target->HasAura(25771) && m_spellInfo->Id != 642) || (m_caster && m_caster->HasAura(25771) && m_spellInfo->Id == 642))
+            return SPELL_FAILED_IMMUNE;
+
+    if ((m_spellInfo->Id == 99844 || m_spellInfo->Id == 99843) && m_caster->GetTypeId() != TYPEID_PLAYER)
+        return SPELL_CAST_OK;
+	
+	// check death state
     if (!m_caster->IsAlive() && !m_spellInfo->IsPassive() && !(m_spellInfo->HasAttribute(SPELL_ATTR0_CASTABLE_WHILE_DEAD) || (IsTriggered() && !m_triggeredByAuraSpell)))
         return SPELL_FAILED_CASTER_DEAD;
 
