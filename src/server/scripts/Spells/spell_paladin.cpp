@@ -1049,22 +1049,14 @@ class spell_pal_shield_of_the_righteous : public SpellScriptLoader
 
 // 85256 - Templar's Verdict
 /// Updated 4.3.4
-class spell_pal_templar_s_verdict : public SpellScriptLoader
+class spell_pal_templar_verdict : public SpellScriptLoader
 {
     public:
-        spell_pal_templar_s_verdict() : SpellScriptLoader("spell_pal_templar_s_verdict") { }
+        spell_pal_templar_verdict() : SpellScriptLoader("spell_pal_templar_verdict") { }
 
-        class spell_pal_templar_s_verdict_SpellScript : public SpellScript
+        class spell_pal_templar_verdict_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_pal_templar_s_verdict_SpellScript);
-
-            bool Validate (SpellInfo const* /*spellEntry*/) override
-            {
-                if (!sSpellMgr->GetSpellInfo(SPELL_PALADIN_DIVINE_PURPOSE_PROC))
-                    return false;
-
-                return true;
-            }
+            PrepareSpellScript(spell_pal_templar_verdict_SpellScript);
 
             bool Load() override
             {
@@ -1077,41 +1069,35 @@ class spell_pal_templar_s_verdict : public SpellScriptLoader
                 return true;
             }
 
-            void ChangeDamage(SpellEffIndex /*effIndex*/)
+            void HandleDummy(SpellEffIndex /*effIndex*/)
             {
                 Unit* caster = GetCaster();
                 int32 damage = GetHitDamage();
 
-                if (caster->HasAura(SPELL_PALADIN_DIVINE_PURPOSE_PROC))
-                    damage *= 7.5;  // 7.5*30% = 225%
-                else
-                {
-                    switch (caster->GetPower(POWER_HOLY_POWER))
+                switch (caster->GetPower(POWER_HOLY_POWER))
                     {
                         case 0: // 1 Holy Power
-                            // same damage
+                            caster->CastSpell(GetHitUnit(), 192218, true);
                             break;
                         case 1: // 2 Holy Power
-                            damage *= 3;    // 3*30 = 90%
+                            caster->CastSpell(GetHitUnit(), 213842, true);
                             break;
                         case 2: // 3 Holy Power
-                            damage *= 7.5;  // 7.5*30% = 225%
+                           caster->CastSpell(GetHitUnit(), 224266, true);
                             break;
                     }
-                }
-
-                SetHitDamage(damage);
             }
 
             void Register() override
             {
-                OnEffectHitTarget += SpellEffectFn(spell_pal_templar_s_verdict_SpellScript::ChangeDamage, EFFECT_0, SPELL_EFFECT_WEAPON_PERCENT_DAMAGE);
+                OnEffectHitTarget += SpellEffectFn(spell_pal_templar_verdict_SpellScript::HandleDummy, EFFECT_0, SPELL_EFFECT_DUMMY);
+				//OnEffectHitTarget += SpellEffectFn(spell_pal_templar_verdict_SpellScript::ChangeDamage, EFFECT_1, SPELL_EFFECT_DUMMY);
             }
         };
 
         SpellScript* GetSpellScript() const override
         {
-            return new spell_pal_templar_s_verdict_SpellScript();
+            return new spell_pal_templar_verdict_SpellScript();
         }
 };
 
@@ -1184,6 +1170,6 @@ void AddSC_paladin_spell_scripts()
     new spell_pal_righteous_defense();
     new spell_pal_sacred_shield();
     new spell_pal_shield_of_the_righteous();
-    new spell_pal_templar_s_verdict();
+    new spell_pal_templar_verdict();
     new spell_pal_seal_of_righteousness();
 }

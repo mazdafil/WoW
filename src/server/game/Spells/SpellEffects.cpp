@@ -2907,7 +2907,30 @@ void Spell::EffectWeaponDmg(SpellEffIndex effIndex)
 
     switch (m_spellInfo->SpellFamilyName)
     {
-        case SPELLFAMILY_WARRIOR:
+        case SPELLFAMILY_PALADIN:
+        {
+            // Templar's Verdict
+            if (m_spellInfo->Id == 85256)
+            {
+                int32 i = m_caster->GetPower(POWER_HOLY_POWER) + 1;
+				switch (i)
+                {
+                    case 1: totalDamagePercentMod *= 1.0f; break;
+                    case 2: totalDamagePercentMod *= 3.0f; break;
+                    case 3: totalDamagePercentMod *= 7.83f; break;
+                }
+                break;
+            }
+            // Crusader Strike
+            else if (m_spellInfo->Id == 35395)
+            {
+                m_caster->CastSpell(m_caster, 85705, true);
+                break;
+            }
+
+            break;
+        }
+		case SPELLFAMILY_WARRIOR:
         {
             // Devastate (player ones)
             if (m_spellInfo->SpellFamilyFlags[1] & 0x40)
