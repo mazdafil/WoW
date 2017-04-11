@@ -3166,6 +3166,12 @@ void SpellMgr::LoadSpellInfoCorrections()
             case 198300: // Gathering Storms
                 spellInfo->ProcCharges = 1; // override proc charges, has 0 (unlimited) in db2
                 break;
+			case 26573:
+                const_cast<SpellEffectInfo*>(spellInfo->GetEffect(EFFECT_2))->TriggerSpell = 32773;
+                break;
+            case 32773:
+                spellInfo->DurationEntry = sSpellDurationStore.LookupEntry(1);
+                break;
             case 42490: // Energized!
             case 42492: // Cast Energized
             case 43115: // Plague Vial

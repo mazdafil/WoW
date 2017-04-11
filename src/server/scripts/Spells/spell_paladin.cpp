@@ -1147,6 +1147,45 @@ class spell_pal_seal_of_righteousness : public SpellScriptLoader
         }
 };
 
+// 205228 - Consecration
+/// Updated 7.1.5
+class spell_pal_consecration : public SpellScriptLoader
+{
+    public:
+        spell_pal_consecration() : SpellScriptLoader("spell_pal_consecration") { }
+
+        class spell_pal_consecration_SpellScript : public SpellScript
+        {
+            PrepareSpellScript(spell_pal_consecration_SpellScript);
+
+            bool Load() override
+            {
+                if (GetCaster()->GetTypeId() != TYPEID_PLAYER)
+                    return false;
+
+                if (GetCaster()->ToPlayer()->getClass() != CLASS_PALADIN)
+                    return false;
+
+                return true;
+            }
+
+           void HandleScript(SpellEffIndex /*effIndex*/)
+        {
+            GetHitUnit()->CastSpell(GetHitUnit(), 32773, true);
+        }
+
+            void Register() override
+            {
+                OnEffectHitTarget += SpellEffectFn(spell_pal_consecration_SpellScript::HandleScript, EFFECT_0, SPELL_EFFECT_APPLY_AURA);
+				//OnEffectHitTarget += SpellEffectFn(spell_pal_templar_verdict_SpellScript::ChangeDamage, EFFECT_1, SPELL_EFFECT_DUMMY);
+            }
+        };
+
+        SpellScript* GetSpellScript() const override
+        {
+            return new spell_pal_consecration_SpellScript();
+        }
+};
 
 void AddSC_paladin_spell_scripts()
 {
@@ -1172,4 +1211,5 @@ void AddSC_paladin_spell_scripts()
     new spell_pal_shield_of_the_righteous();
     new spell_pal_templar_verdict();
     new spell_pal_seal_of_righteousness();
+	new spell_pal_consecration();
 }

@@ -5368,6 +5368,11 @@ void AuraEffect::HandlePeriodicDummyAuraTick(Unit* target, Unit* caster) const
                     break;
             }
             break;
+		case SPELLFAMILY_PALADIN:
+            // Holy Radiance
+            if (GetId() == 32773)
+                target->CastSpell(target, 81297, true);
+            break;
         default:
             break;
     }
@@ -5742,7 +5747,15 @@ void AuraEffect::HandlePeriodicDamageAurasTick(Unit* target, Unit* caster) const
             cleanDamage.mitigated_damage += damage - damageReductedArmor;
             damage = damageReductedArmor;
         }
-
+		
+		// Consecration
+        if (GetSpellInfo()->Id == 32773)
+        {
+            float ap = caster->GetTotalAttackPowerValue(BASE_ATTACK);
+            int32 holy = caster->SpellBaseDamageBonusDone(SPELL_SCHOOL_MASK_HOLY) + target->SpellBaseDamageBonusTaken(SPELL_SCHOOL_MASK_HOLY);
+            damage += (0.04 * holy + 0.04 * ap);
+        }
+		
         // There is a Chance to make a Soul Shard when Drain soul does damage
         if (GetSpellInfo()->SpellFamilyName == SPELLFAMILY_WARLOCK && (GetSpellInfo()->SpellFamilyFlags[0] & 0x00004000))
         {
