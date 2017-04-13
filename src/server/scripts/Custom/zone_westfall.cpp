@@ -2413,13 +2413,12 @@ public:
                 break;
             case 11:
                 if (_player)
-                    _player->CastSpell(_player, SPELL_QUEST_CREDIT_26290);
-
-                _player = nullptr;
-                _timer = 60000; _phase = 12;
+                    _player->KilledMonsterCredit(119704);
+					_player = nullptr;
+					_timer = 60000; _phase = 12;
                 break;
             case 12:
-                _timer = 0; _phase = 0;
+				_timer = 0; _phase = 0;
                 break;
             }
         }
