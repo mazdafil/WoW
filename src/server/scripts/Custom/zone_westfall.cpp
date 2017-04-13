@@ -2365,7 +2365,10 @@ public:
             case 1:
                 if (_player)
                     if (_player->GetPositionZ() > 70.1f)
+					{
                         _timer = 7000; _phase = 2;
+					}
+				break;
             case 2:
                 me->HandleEmoteCommand(1);
                 Talk(0);
