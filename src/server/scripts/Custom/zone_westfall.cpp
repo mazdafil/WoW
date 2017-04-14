@@ -2125,7 +2125,7 @@ public:
             case 6:
                 if (Creature* horatio = me->FindNearestCreature(NPC_HORATIO_LANE_42308, 15.0f))
                 {
-                    horatio->GetMotionMaster()->MovePath(423081, false);
+                    horatio->GetMotionMaster()->MovePoint(1030, -10513.5f, 1046.5f, 60.5f);
                 }
                 _timer = 4000; _phase = 7;
                 break;
@@ -2158,7 +2158,7 @@ public:
             case 10: // walk
                 if (Creature* horatio = me->FindNearestCreature(NPC_HORATIO_LANE_42308, 15.0f))
                 {
-                    horatio->GetMotionMaster()->MovePath(423082, false);
+                    horatio->GetMotionMaster()->MovePoint(1030, -10507.6f, 1048.5f, 60.5f);
                 }
                 _timer = 2000; _phase = 11;
                 break;
@@ -2365,10 +2365,7 @@ public:
             case 1:
                 if (_player)
                     if (_player->GetPositionZ() > 70.1f)
-					{
                         _timer = 7000; _phase = 2;
-					}
-				break;
             case 2:
                 me->HandleEmoteCommand(1);
                 Talk(0);
