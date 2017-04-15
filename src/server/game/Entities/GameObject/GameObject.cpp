@@ -973,6 +973,11 @@ void GameObject::DeleteFromDB()
     WorldDatabase.Execute(stmt);
 }
 
+GameObject* GameObject::GetGameObject(WorldObject& object, ObjectGuid guid)
+{
+    return object.GetMap()->GetGameObject(guid);
+}
+
 /*********************************************************/
 /***                    QUEST SYSTEM                   ***/
 /*********************************************************/

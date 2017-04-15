@@ -1,0 +1,18 @@
+UPDATE `creature_template` SET ScriptName = 'boss_glubtok', AIName = '' WHERE entry = 47162;
+UPDATE `creature_template` SET ScriptName = 'boss_admiral_ripsnarl', AIName = '' WHERE entry = 47626;
+UPDATE `creature_template` SET ScriptName = 'boss_captain_cookie', AIName = '' WHERE entry = 47739;
+UPDATE `creature_template` SET ScriptName = 'boss_foo_reaper_5000', AIName = '' WHERE entry = 43778;
+UPDATE `creature_template` SET ScriptName = 'boss_helix_gearbreaker', AIName = '' WHERE entry = 47296;
+UPDATE `creature_template` SET ScriptName = 'boss_lumbering_oaf', AIName = '' WHERE entry = 47297;
+UPDATE `creature_template` SET ScriptName = 'boss_vanessa_van_cleef', AIName = '' WHERE entry = 49541;
+UPDATE `creature_template` SET ScriptName = 'npc_defias_cannon_48266', AIName = '' WHERE entry = 48266;
+INSERT INTO `item_script_names` VALUES (5397, 'item_defias_gunpowder');
+UPDATE `gameobject_template` SET ScriptName = 'go_factory_lever_101831', AIName = '' WHERE entry = 101831;
+UPDATE `gameobject_template` SET ScriptName = 'go_mastroom_lever_101832', AIName = '' WHERE entry = 101832;
+UPDATE `gameobject_template` SET ScriptName = 'go_ironclad_lever_101833', AIName = '' WHERE entry = 101833;
+UPDATE `gameobject_template` SET ScriptName = 'go_foundry_lever_101834', AIName = '' WHERE entry = 101834;
+UPDATE `gameobject_template` SET ScriptName = 'go_factory_door_13965', AIName = '' WHERE entry = 13965;
+UPDATE `gameobject_template` SET ScriptName = 'go_mastroom_door_16400', AIName = '' WHERE entry = 16400;
+UPDATE `gameobject_template` SET ScriptName = 'go_foundry_door_16399', AIName = '' WHERE entry = 16399;
+UPDATE `gameobject_template` SET ScriptName = 'go_ironclad_door_16397', AIName = '' WHERE entry = 16397;
+UPDATE `gameobject_template` SET ScriptName = 'go_defias_cannon_16398', AIName = '' WHERE entry = 16398;
