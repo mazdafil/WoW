@@ -3870,30 +3870,23 @@ void Unit::RemoveAurasWithAttribute(uint32 flags)
     }
 }
 
-void Unit::RemoveNotOwnSingleTargetAuras(uint32 newPhase, bool phaseid)
+void Unit::RemoveNotOwnSingleTargetAuras(uint32 newPhase, bool phaseid) 
 {
     // single target auras from other casters
-    // Iterate m_ownedAuras - aura is marked as single target in Unit::AddAura (and pushed to m_ownedAuras).
-    // m_appliedAuras will NOT contain the aura before first Unit::Update after adding it to m_ownedAuras.
-    // Quickly removing such an aura will lead to it not being unregistered from caster's single cast auras container
-    // leading to assertion failures if the aura was cast on a player that can
-    // (and is changing map at the point where this function is called).
-    // Such situation occurs when player is logging in inside an instance and fails the entry check for any reason.
-    // The aura that was loaded from db (indirectly, via linked casts) gets removed before it has a chance
-    // to register in m_appliedAuras
-    for (AuraMap::iterator iter = m_ownedAuras.begin(); iter != m_ownedAuras.end();)
+    for (AuraApplicationMap::iterator iter = m_appliedAuras.begin(); iter != m_appliedAuras.end();)
     {
-        Aura const* aura = iter->second;
+        AuraApplication const* aurApp = iter->second;
+        Aura const* aura = aurApp->GetBase();
 
-        if (aura->GetCasterGUID() != GetGUID() && aura->IsSingleTarget())
+        if (aura->GetCasterGUID() != GetGUID() && aura->GetSpellInfo()->IsSingleTarget())
         {
             if (!newPhase && !phaseid)
-                RemoveOwnedAura(iter);
+                RemoveAura(iter);
             else
             {
                 Unit* caster = aura->GetCaster();
                 if (!caster || (newPhase && !caster->IsInPhase(newPhase)) || (!newPhase && !caster->IsInPhase(this)))
-                    RemoveOwnedAura(iter);
+                    RemoveAura(iter);               
                 else
                     ++iter;
             }
@@ -3907,7 +3900,7 @@ void Unit::RemoveNotOwnSingleTargetAuras(uint32 newPhase, bool phaseid)
     for (AuraList::iterator iter = scAuras.begin(); iter != scAuras.end();)
     {
         Aura* aura = *iter;
-        if (aura->GetUnitOwner() != this && !aura->GetUnitOwner()->IsInPhase(newPhase))
+        if (aura->GetUnitOwner() != this && !aura->GetUnitOwner()->IsInPhase(newPhase) && aura->GetUnitOwner()->GetEntry() != 42693)
         {
             aura->Remove();
             iter = scAuras.begin();
@@ -13947,11 +13940,10 @@ bool Unit::SetInPhase(uint32 id, bool update, bool apply)
             (*itr)->SetInPhase(id, true, apply);
 
     for (uint8 i = 0; i < MAX_SUMMON_SLOT; ++i)
-        if (!m_SummonSlot[i].IsEmpty())
-            if (Creature* summon = GetMap()->GetCreature(m_SummonSlot[i]))
+        if (Creature* summon = GetMap()->GetCreature(m_SummonSlot[i]))
                 summon->SetInPhase(id, true, apply);
 
-    RemoveNotOwnSingleTargetAuras(0, true);
+    RemoveNotOwnSingleTargetAuras(id, true);
 
     return res;
 }

@@ -3509,6 +3509,7 @@ class spell_item_brutal_kinship : public SpellScriptLoader
         }
 };
 
+
 void AddSC_item_spell_scripts()
 {
     // 23074 Arcanite Dragonling

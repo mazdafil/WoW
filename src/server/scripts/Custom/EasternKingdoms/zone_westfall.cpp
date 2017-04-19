@@ -2650,12 +2650,12 @@ public:
     {
         npc_vision_of_the_past_VehicleAI(Creature *c) : VehicleAI(c) { }
 
-        EventMap    m_events;
+        EventMap        m_events;
 		ObjectGuid      m_playerGUID;
 		ObjectGuid      m_edwinGUID;
 		ObjectGuid      m_blackguard1GUID;
 		ObjectGuid      m_blackguard2GUID;
-		ObjectGuid     m_warrierGUID;
+		ObjectGuid      m_warrierGUID;
 		ObjectGuid      m_priestGUID;
 		ObjectGuid      m_rogueGUID;
 		ObjectGuid      m_hunterGUID;
