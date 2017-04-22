@@ -1,4 +1,4 @@
-INSERT INTO `quest_objectives` VALUES (289477, 26320, 0, 0, 42371, 1, 1, 0, 0, NULL);
+INSERT INTO `quest_objectives` VALUES (289477, 26320, 0, 0, 42371, 1, 1, 0, 0, NULL, 23360);
 INSERT INTO `quest_objectives_locale` VALUES (289477, 'ruRU', 26320, 0, 'Видение прошлого раскрыто', 19865);
 UPDATE `gameobject_template` SET displayId = 299, Data1 = 30, Data3 = 1, Data4 = 26320, Data6= -1 WHERE entry = 204039;
 DELETE FROM `gameobject` WHERE `guid`= 301116;

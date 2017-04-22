@@ -3234,6 +3234,23 @@ void Spell::EffectScriptEffect(SpellEffIndex effIndex)
         {
             switch (m_spellInfo->Id)
             {
+				// ID - 79679 Summon All Actors
+                case 79679:
+                {
+                    if (Player* player = m_caster->ToPlayer())
+                    {
+                        player->CastSpell(player, 79663); // ID - 79663 Summon Gryan Stoutmantle 42750
+                        player->CastSpell(player, 79664); // ID - 79664 Summon Horatio Laine 42744
+                        player->CastSpell(player, 79665); // ID - 79665 Summon Hope Saldean 42749
+                        player->CastSpell(player, 79666); // ID - 79666 Summon Stormwind Investigator 01 42745
+                        player->CastSpell(player, 79667); // ID - 79667 Summon Stormwind Investigator 02 42745
+                        player->CastSpell(player, 79668); // ID - 79668 Summon Captain Danuvin 42751
+                        player->CastSpell(player, 79669); // ID - 79669 Summon Scout Galiaan 42752 
+                        player->CastSpell(player, 79670); // ID - 79670 Summon Ripsnarl 42748 (2979)
+                        player->CastSpell(player, 79785); // ID - 79785 General Trigger: 1 Gryan
+                    }
+                    break;
+                }
                 case 55693:                                 // Remove Collapsing Cave Aura
                     if (!unitTarget)
                         return;

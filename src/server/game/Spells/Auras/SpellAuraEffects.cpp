@@ -5566,6 +5566,12 @@ void AuraEffect::HandlePeriodicTriggerSpellAuraTick(Unit* target, Unit* caster) 
         // Spell exist but require custom code
         switch (auraId)
         {
+			 case 79425:
+            {
+                if (Unit* unit = ObjectAccessor::GetUnit(*target, caster->GetTarget()))
+                    target = unit;
+                break;
+            }
             // Pursuing Spikes (Anub'arak)
             case 65920:
             case 65922:
