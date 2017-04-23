@@ -1,0 +1,17 @@
+UPDATE `creature_template` SET `ScriptName`='npc_admiral_ripsnarl_vapor' WHERE  entry = 47714;
+INSERT INTO `spell_script_names` VALUES (92042, 'spell_admiral_ripsnarl_coalesce');
+INSERT INTO `creature` (`guid`, `id`, `PhaseId`, `position_x`, `position_y`, `position_z`, `orientation`) VALUES ('452611', '8931', '361', '-10653.3', '1166.43', '34.9278', '5.77704');
+UPDATE `creature_template` SET `ScriptName`='npc_captain_cookie_cauldron' WHERE  entry = 47754;
+UPDATE `creature_template` SET ScriptName='npc_captain_cookie_good_food' WHERE  entry IN (48006, 48294, 48296, 48297, 48300, 48301);
+UPDATE `creature_template` SET ScriptName='npc_captain_cookie_bad_food' WHERE  entry IN (48276, 48293, 48295, 48298, 48299, 48302);
+INSERT INTO `spell_script_names` VALUES (89267, 'spell_captain_cookie_setiated');
+INSERT INTO `spell_script_names` VALUES (89732, 'spell_captain_cookie_nauseated');
+INSERT INTO `spell_script_names` VALUES (89740, 'spell_captain_cookie_throw_food_targeting');
+UPDATE `creature_template` SET `ScriptName`='npc_foereaper_targeting_bunny' WHERE  entry = 47468;
+UPDATE `creature_template` SET `ScriptName`='npc_helix_crew' WHERE  entry = 49136;
+UPDATE `creature_template` SET `ScriptName`='npc_sticky_bomb' WHERE  entry = 47314;
+INSERT INTO `spell_script_names` VALUES (88278, 'spell_helix_force_player_to_ride_oaf');
+INSERT INTO `spell_script_names` VALUES (88352, 'spell_helix_chest_bomb');
+UPDATE `creature_template` SET `ScriptName`='npc_vanessa_vancleef_a_note_from_vanessa' WHERE  entry = 49564;
+UPDATE `creature_template` SET `ScriptName`='npc_vanessa_vancleef_vanessa_sitting' WHERE  entry = 49429;
+INSERT INTO `spell_script_names` VALUES (92620, 'spell_vanessa_vancleef_backslash_targeting');

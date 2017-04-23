@@ -83,9 +83,15 @@ enum CreatureIds
     NPC_HELIX_GEARBREAKER   = 47296,
     NPC_MR_SMITE            = 646,
     NPC_VANESSA_VANCLEEF    = 49541,
+	NPC_NOTE                = 49564,
+	NPC_VANESSA_SITTING     = 49429,
 
 
 };
+
+const Position centershipPos = {-63.167f, -819.315f, 41.27f, 6.25f};
+const Position notePos = {-74.3611f, -820.014f, 40.3714f, 4.01426f};
+const Position vanessaPos = {-75.5851f, -819.964f, 47.0673f, 6.17846f};
 
 template<class AI>
 CreatureAI* GetDeadminesAI(Creature* creature)
