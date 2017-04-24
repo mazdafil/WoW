@@ -203,6 +203,7 @@ enum SpellFacingFlags
 #define BASE_MINDAMAGE 1.0f
 #define BASE_MAXDAMAGE 2.0f
 #define BASE_ATTACK_TIME 2000
+#define CREATURE_MAX_SPELLS     8
 
 // byte value (UNIT_FIELD_BYTES_1, 0)
 enum UnitStandStateType

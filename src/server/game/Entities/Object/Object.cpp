@@ -1867,6 +1867,24 @@ bool WorldObject::IsInRange3d(float x, float y, float z, float minRange, float m
     return distsq < maxdist * maxdist;
 }
 
+std::list<Creature*> WorldObject::FindAllCreaturesInRange(float range)
+{
+    std::list<Creature*> templist;
+    float x, y, z;
+    this->GetPosition(x, y, z);
+
+    CellCoord pair(Trinity::ComputeCellCoord(x, y));
+    Cell cell(pair);
+    cell.SetNoCreate();
+
+    Trinity::AllCreaturesInRange check(this, range);
+    Trinity::CreatureListSearcher<Trinity::AllCreaturesInRange> searcher(this, templist, check);
+    TypeContainerVisitor<Trinity::CreatureListSearcher<Trinity::AllCreaturesInRange>, GridTypeMapContainer> cSearcher(searcher);
+    cell.Visit(pair, cSearcher, *(this->GetMap()), *this, this->GetGridActivationRange());
+
+    return templist;
+}
+
 bool WorldObject::IsInBetween(Position const& pos1, Position const& pos2, float size) const
 {
     float dist = GetExactDist2d(pos1);
@@ -3163,6 +3181,17 @@ void WorldObject::PlayDirectSound(uint32 soundId, Player* target /*= nullptr*/)
         target->SendDirectMessage(WorldPackets::Misc::PlaySound(GetGUID(), soundId).Write());
     else
         SendMessageToSet(WorldPackets::Misc::PlaySound(GetGUID(), soundId).Write(), true);
+}
+
+void WorldObject::SendPlaySound(uint32 Sound, bool OnlySelf)
+{
+    WorldPacket data(SMSG_PLAY_SOUND, 4 + 8);
+    data << uint32(Sound);
+    data << uint64(GetGUIDLow());
+    if (OnlySelf && GetTypeId() == TYPEID_PLAYER)
+        this->ToPlayer()->GetSession()->SendPacket(&data);
+    else
+        SendMessageToSet(&data, true); // ToSelf ignored in this case
 }
 
 void WorldObject::DestroyForNearbyPlayers()

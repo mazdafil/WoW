@@ -616,6 +616,7 @@ class TC_GAME_API WorldObject : public Object, public WorldLocation
 
         void PlayDistanceSound(uint32 soundId, Player* target = nullptr);
         void PlayDirectSound(uint32 soundId, Player* target = nullptr);
+		void SendPlaySound(uint32 Sound, bool OnlySelf);
 
         virtual void SaveRespawnTime() { }
         void AddObjectToRemoveList();
@@ -720,6 +721,7 @@ class TC_GAME_API WorldObject : public Object, public WorldLocation
         virtual uint16 GetAIAnimKitId() const { return 0; }
         virtual uint16 GetMovementAnimKitId() const { return 0; }
         virtual uint16 GetMeleeAnimKitId() const { return 0; }
+		std::list<Creature*> FindAllCreaturesInRange(float range);
 
     protected:
         std::string m_name;

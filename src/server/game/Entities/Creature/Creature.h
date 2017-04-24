@@ -509,6 +509,7 @@ struct EquipmentItem
 struct EquipmentInfo
 {
     EquipmentItem Items[MAX_EQUIPMENT_ITEMS];
+	uint32 ItemEntry[MAX_EQUIPMENT_ITEMS];
 };
 
 // Benchmarked: Faster than std::map (insert/find)
