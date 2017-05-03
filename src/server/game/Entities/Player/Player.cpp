@@ -2450,8 +2450,8 @@ void Player::GiveLevel(uint8 level)
     SetLevel(level);
 
     UpdateSkillsForLevel();
-    // LearnDefaultSkills();
-    // LearnSpecializationSpells();
+    LearnDefaultSkills();
+    LearnSpecializationSpells();
 
     // save base values (bonuses already included in stored stats
     for (uint8 i = STAT_STRENGTH; i < MAX_STATS; ++i)
@@ -14572,7 +14572,8 @@ bool Player::CanTakeQuest(Quest const* quest, bool msg)
 {
     return !DisableMgr::IsDisabledFor(DISABLE_TYPE_QUEST, quest->GetQuestId(), this)
         && SatisfyQuestStatus(quest, msg) && SatisfyQuestExclusiveGroup(quest, msg)
-        && SatisfyQuestClass(quest, msg) && SatisfyQuestRace(quest, msg) && SatisfyQuestSkill(quest, msg) && SatisfyQuestReputation(quest, msg)
+        && SatisfyQuestClass(quest, msg) && SatisfyQuestRace(quest, msg) && SatisfyQuestLevel(quest, msg)
+        && SatisfyQuestSkill(quest, msg) && SatisfyQuestReputation(quest, msg)
         && SatisfyQuestPreviousQuest(quest, msg) && SatisfyQuestTimed(quest, msg)
         && SatisfyQuestNextChain(quest, msg) && SatisfyQuestPrevChain(quest, msg)
         && SatisfyQuestDay(quest, msg) && SatisfyQuestWeek(quest, msg)
@@ -15366,16 +15367,16 @@ bool Player::SatisfyQuestLevel(Quest const* qInfo, bool msg) const
         return false;
     }
 
-    if (qInfo->GetMaxLevel() > 0 && getLevel() > qInfo->GetMaxLevel())
-    {
-        if (msg)
-        {
-            SendCanTakeQuestResponse(QUEST_ERR_NONE); // There doesn't seem to be a specific response for too high player level
-            TC_LOG_DEBUG("misc", "Player::SatisfyQuestLevel: Sent QUEST_ERR_FAILED_LOW_LEVEL (QuestID: %u) because player '%s' (%s) doesn't have the required (max) level.",
-                qInfo->GetQuestId(), GetName().c_str(), GetGUID().ToString().c_str());
-        }
-        return false;
-    }
+    //if (qInfo->GetMaxLevel() > 0 && getLevel() > qInfo->GetMaxLevel())
+    //{
+      //  if (msg)
+        //{
+          //  SendCanTakeQuestResponse(QUEST_ERR_NONE); // There doesn't seem to be a specific response for too high player level
+            //TC_LOG_DEBUG("misc", "Player::SatisfyQuestLevel: Sent QUEST_ERR_FAILED_LOW_LEVEL (QuestID: %u) because player '%s' (%s) doesn't have the required (max) level.",
+              //  qInfo->GetQuestId(), GetName().c_str(), GetGUID().ToString().c_str());
+        //}
+        //return false;
+    //}
     return true;
 }
 
