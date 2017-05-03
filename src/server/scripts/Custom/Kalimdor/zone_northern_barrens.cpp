@@ -964,7 +964,7 @@ public:
 class vehicle_riding_shotgun_34438 : public VehicleScript
 {
 public:
-    vehicle_riding_shotgun_34438() : VehicleScript("npc_riding_shotgun_34438") { }
+    vehicle_riding_shotgun_34438() : VehicleScript("vehicle_riding_shotgun_34438") { }
 
     void OnAddPassenger(Vehicle* veh, Unit* passenger, int8 /*seatId*/)
     {

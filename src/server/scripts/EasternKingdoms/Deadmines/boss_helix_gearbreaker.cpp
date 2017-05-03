@@ -158,7 +158,10 @@ public:
         void JustDied(Unit* /*killer*/) override
         {
             if (GameObject* door = ObjectAccessor::GetGameObject(*me, m_instance->GetGuidData(DATA_MASTROOM_DOOR)))
+			{
                 door->ResetDoorOrButton();
+				door->SetGoState(GO_STATE_ACTIVE);
+			}
 			_JustDied();
             Talk(SAY_DEATH);
             m_instance->SetData(BOSS_HELIX_GEARBREAKER, DONE);

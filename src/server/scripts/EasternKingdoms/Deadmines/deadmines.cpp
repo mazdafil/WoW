@@ -85,7 +85,7 @@ public:
         void OnStateChanged(uint32 state, Unit* unit)
         {
             if (_instance > 0 && state == 2)
-                if (GameObject* door = ObjectAccessor::GetGameObject(*go, _instance->GetGuidData(DATA_MASTROOM_DOOR)))
+                if (GameObject* door = ObjectAccessor::GetGameObject(*go, _instance->GetGuidData(DATA_FACTORY_DOOR)))
                 {
                     GOState state = door->GetGoState() == GO_STATE_READY ? GO_STATE_ACTIVE : GO_STATE_READY;
                     door->SetGoState(state); // open the door  GO_STATE_READY  GO_STATE_ACTIVE  GO_STATE_ACTIVE_ALTERNATIVE
@@ -249,7 +249,7 @@ public:
         void OnStateChanged(uint32 state, Unit* unit)
         {
             if (_instance > 0 && state == 2)
-                if (GameObject* door = ObjectAccessor::GetGameObject(*go, _instance->GetGuidData(DATA_MASTROOM_DOOR)))
+                if (GameObject* door = ObjectAccessor::GetGameObject(*go, _instance->GetGuidData(DATA_FOUNDRY_DOOR)))
                 {
                     GOState state = door->GetGoState() == GO_STATE_READY ? GO_STATE_ACTIVE : GO_STATE_READY;
                     door->SetGoState(state); // open the door  GO_STATE_READY  GO_STATE_ACTIVE  GO_STATE_ACTIVE_ALTERNATIVE

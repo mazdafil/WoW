@@ -116,7 +116,10 @@ public:
         void JustDied(Unit* Killer)
         {
             if (GameObject* door = ObjectAccessor::GetGameObject(*me, m_instance->GetGuidData(DATA_FACTORY_DOOR)))
+			{
                 door->ResetDoorOrButton();
+				door->SetGoState(GO_STATE_ACTIVE);
+			}
 
             if (Player* player = Killer->ToPlayer())
                 player->KilledMonsterCredit(47162);

@@ -69,6 +69,12 @@ void AddSC_instance_blackwing_lair();
 void AddSC_deadmines();                      //Deadmines
 void AddSC_instance_deadmines();
 void AddSC_boss_mr_smite();
+void AddSC_boss_vanessa_van_cleef();
+void AddSC_boss_captain_cookie();
+void AddSC_boss_admiral_ripsnarl();
+void AddSC_boss_foo_reaper_5000();
+void AddSC_boss_helix_gearbreaker();
+void AddSC_boss_glubtok();
 void AddSC_gnomeregan();                     //Gnomeregan
 void AddSC_instance_gnomeregan();
 void AddSC_boss_attumen();                   //Karazhan
@@ -253,6 +259,12 @@ void AddEasternKingdomsScripts()
     AddSC_instance_blackwing_lair();
     AddSC_deadmines();                      //Deadmines
     AddSC_boss_mr_smite();
+	AddSC_boss_vanessa_van_cleef();
+	AddSC_boss_captain_cookie();
+    AddSC_boss_admiral_ripsnarl();
+    AddSC_boss_foo_reaper_5000();
+    AddSC_boss_helix_gearbreaker();
+    AddSC_boss_glubtok();
     AddSC_instance_deadmines();
     AddSC_gnomeregan();                     //Gnomeregan
     AddSC_instance_gnomeregan();

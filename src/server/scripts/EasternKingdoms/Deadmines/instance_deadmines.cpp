@@ -185,44 +185,64 @@ public:
                 {
                     case DATA_FACTORY_DOOR:
                         return m_ListOfGUID[DATA_FACTORY_DOOR];
+						break;
 					case DATA_FACTORY_DOOR_LEVER:
                         return m_ListOfGUID[DATA_FACTORY_DOOR_LEVER];
+						break;
 				    case DATA_HEAVY_DOOR2:
                         return m_ListOfGUID[DATA_HEAVY_DOOR2];
+						break;
 					case DATA_MASTROOM_DOOR:
                         return m_ListOfGUID[DATA_MASTROOM_DOOR];
+						break;
 					case DATA_MASTROOM_DOOR_LEVER:
                         return m_ListOfGUID[DATA_MASTROOM_DOOR_LEVER];
+						break;
 					case DATA_HEAVY_DOOR4:
                         return m_ListOfGUID[DATA_HEAVY_DOOR4];
+						break;
 					case DATA_FOUNDRY_DOOR:
                         return m_ListOfGUID[DATA_FOUNDRY_DOOR];
+						break;
 					case DATA_FOUNDRY_DOOR_LEVER:
                         return m_ListOfGUID[DATA_FOUNDRY_DOOR_LEVER];
+						break;
 					case DATA_IRONCLAD_DOOR:
                         return m_ListOfGUID[DATA_IRONCLAD_DOOR];
+						break;
 					case DATA_IRONCLAD_DOOR_LEVER:
                         return m_ListOfGUID[DATA_IRONCLAD_DOOR_LEVER];
+						break;
 					case DATA_DEFIAS_CANNON:
                         return m_ListOfGUID[DATA_DEFIAS_CANNON];
+						break;
 					case DATA_MR_SMITE_CHEST:
                         return m_ListOfGUID[DATA_MR_SMITE_CHEST];
+						break;
 					case DATA_ADMIRAL_RIPSNARL:
                         return m_ListOfGUID[DATA_ADMIRAL_RIPSNARL];
+						break;
 					case DATA_CAPTAIN_COOKIE:
                         return m_ListOfGUID[DATA_CAPTAIN_COOKIE];
+						break;
 					case DATA_FOO_REAPER_5000:
                         return m_ListOfGUID[DATA_FOO_REAPER_5000];
+						break;
 					case DATA_GLUBTOK:
                         return m_ListOfGUID[DATA_GLUBTOK];
+						break;
 					case DATA_LUMBERING_OAF:
                         return m_ListOfGUID[DATA_LUMBERING_OAF];
+						break;
 					case DATA_HELIX_GEARBREAKER:
                         return m_ListOfGUID[DATA_HELIX_GEARBREAKER];
+						break;
 					case DATA_MR_SMITE:
                         return m_ListOfGUID[DATA_MR_SMITE];
+						break;
 					case DATA_VANESSA_VANCLEEF:
                         return m_ListOfGUID[DATA_VANESSA_VANCLEEF];
+						break;
 					default:
                         break;
                 }
@@ -333,6 +353,8 @@ public:
                     npc->setFaction(35);
                 if (Creature* npc = door->SummonCreature(46612, -71.3333f, -406.488f, 55.1161f, 0.890118f))
                     npc->setFaction(35);
+				if (Creature* npc = door->SummonCreature(46612, -66.195f, -802.708f, 40.978f, 4.553f))
+					npc->setFaction(35);
                 if (Creature* npc = door->SummonCreature(24935, -55.8281f, -405.351f, 54.9577f, 1.27409f))
                     npc->setFaction(35);
                 if (Creature* npc = door->SummonCreature(50595, -19.3856f, -382.425f, 61.2815f, 5.46498f))
@@ -381,6 +403,7 @@ public:
                 door->SummonCreature(50595, -10.8074f, -381.678f, 61.7195f, 4.38898f);
                 door->SummonCreature(50595, -46.7356f, -384.701f, 55.5368f, 0.752586f);
                 door->SummonCreature(46612, -71.3333f, -406.488f, 55.1161f, 0.890118f);
+				door->SummonCreature(46612, -66.195f, -802.708f, 40.978f, 4.553f);
                 door->SummonCreature(24935, -55.8281f, -405.351f, 54.9577f, 1.27409f);
                 door->SummonCreature(46614, -49.7597f, -399.682f, 55.6046f, 0.55936f);
                 door->SummonCreature(46614, -46.989f, -395.134f, 55.4531f, 5.28353f);

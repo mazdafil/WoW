@@ -57,6 +57,7 @@ enum Adds
 {
     NPC_TARGETING_BUNNY     = 47468,
     NPC_DEFIAS_REAPER       = 47403,
+	NPC_DEFIAS_WATCHER		= 47404,
     NPC_MOLTEN_SLAG         = 49229,
     NPC_PROTOTYPE_REAPER    = 49208, // 87239 91731
 };
@@ -172,7 +173,10 @@ public:
         void JustDied(Unit* /*killer*/) override
         {
             if (GameObject* door = ObjectAccessor::GetGameObject(*me, m_instance->GetGuidData(DATA_FOUNDRY_DOOR)))
+			{
                 door->ResetDoorOrButton();
+				door->SetGoState(GO_STATE_ACTIVE);
+			}
 			_JustDied();
             Talk(SAY_DEATH);
 
@@ -181,7 +185,9 @@ public:
 
         void UpdateAI(uint32 diff) override
         {
-            if (!UpdateVictim())
+            if (Player* player = me->FindNearestPlayer(125.0f, true))
+				me->RemoveAura(SPELL_OFF_LINE);
+			if (!UpdateVictim())
                 return;
 			events.Update(diff);
 

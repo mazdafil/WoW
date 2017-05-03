@@ -1048,6 +1048,8 @@ void Creature::SetLootRecipient(Unit* unit)
     m_lootRecipient = player->GetGUID();
     if (Group* group = player->GetGroup())
         m_lootRecipientGroup = group->GetGUID();
+	 else
+        m_lootRecipientGroup = ObjectGuid::Empty;
 
     SetFlag(OBJECT_DYNAMIC_FLAGS, UNIT_DYNFLAG_TAPPED);
 }

@@ -1459,6 +1459,33 @@ public:
     }
 };
 
+// 79084
+class spell_unbound_energy_79084 : public SpellScriptLoader
+{
+public:
+    spell_unbound_energy_79084() : SpellScriptLoader("spell_unbound_energy_79084") { }
+
+    class spell_unbound_energy_79084_SpellScript : public SpellScript
+    {
+        PrepareSpellScript(spell_unbound_energy_79084_SpellScript);
+
+        void FilterTargets(std::list<WorldObject*>& targets)
+        {
+            targets.remove_if(RandomCheck(7.0f));
+        }
+
+        void Register() override
+        {
+            OnObjectAreaTargetSelect += SpellObjectAreaTargetSelectFn(spell_unbound_energy_79084_SpellScript::FilterTargets, EFFECT_0, TARGET_UNIT_SRC_AREA_ENTRY);
+        }
+    };
+
+    SpellScript* GetSpellScript() const override
+    {
+        return new spell_unbound_energy_79084_SpellScript();
+    }
+};
+
 // #############################################  quest = 26236, 26241, 26266   Saldean's
 
 enum eQuest26236
@@ -4439,4 +4466,5 @@ void AddSC_westfall()
 	new item_westfall_stew();
 	new spell_tie_up_good_guys_79723();
 	new npc_rise_of_the_brotherhood_event_dummy_42771();
+	new spell_unbound_energy_79084();
 }

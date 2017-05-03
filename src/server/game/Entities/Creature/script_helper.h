@@ -161,6 +161,21 @@ enum Events
     PLAYER_GUID = 99991,
 };
 
+// remove randomly, only randomPct is left
+class RandomCheck
+{
+public:
+    explicit RandomCheck(float const randomPct) : m_pct(randomPct) { }
+
+    bool operator()(WorldObject* obj) const
+    {
+        return (frand(0, 100) > m_pct);
+    }
+
+private:
+    float const m_pct;
+};
+
 class RemoveFromList
  {
  public:
