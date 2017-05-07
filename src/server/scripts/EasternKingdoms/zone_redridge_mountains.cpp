@@ -222,19 +222,16 @@ public:
     {
         npc_big_earl_43248AI(Creature *c) : ScriptedAI(c) { }
 
-        EventMap m_events;
-        ObjectGuid m_targetGUID;
-        FakeAttackMembers m_showFight;
 
         void Reset() override
         {
-            m_events.RescheduleEvent(EVENT_INIT_TARGET, 1000);
-            m_showFight = FakeAttackMembers(me);
+           
         }
 
         void DamageTaken(Unit* attacker, uint32& damage) override
         {
-            damage = 0;
+            if (attacker->GetEntry() == NPC_DUMPY)
+                damage = 0;
         }
 
         void AttackStart(Unit* who) override
@@ -244,52 +241,7 @@ public:
 
         void UpdateAI(uint32 diff) override
         {
-            m_events.Update(diff);
-
-            while (uint32 eventId = m_events.ExecuteEvent())
-            {
-                switch (eventId)
-                {
-                case EVENT_INIT_TARGET:
-                {
-                    if (!m_showFight.m_hasInit)
-                    {
-                        std::list<uint32> asList;
-                        if (Creature* npc = me->FindNearestCreature(NPC_DUMPY, 15.0f))
-                        {
-                            asList.push_back(npc->GetEntry());
-                            m_targetGUID = npc->GetGUID();
-                        }
-                        if (Creature* npc = me->FindNearestCreature(NPC_BIG_EARL, 15.0f))
-                        {
-                            asList.push_back(npc->GetEntry());
-                            m_targetGUID = npc->GetGUID();
-                        }
-                        m_showFight.Initialize(asList);
-                    }
-                    m_events.ScheduleEvent(EVENT_CHECK_FIGHT, 1000);
-                    break;
-                }
-                case EVENT_CHECK_FIGHT:
-                {
-                    if (Creature* creature = m_showFight.GetSparringPartner())
-                    {
-                        if (!me->IsInCombat())
-                            me->Attack(creature, true);
-                    }
-                    else if (Creature* creature = m_showFight.GetRangedPartner())
-                    {
-                        me->SetFacingToObject(creature);
-                        if (uint32 spellId = m_showFight.GetRangedSpellId())
-                            me->CastSpell(creature, spellId, true);
-                        me->GetMotionMaster()->MoveIdle();
-                    }
-
-                    m_events.ScheduleEvent(EVENT_CHECK_FIGHT, urand(900, 1200));
-                    break;
-                }
-                }
-            }
+            
 
             if (!UpdateVictim())
                 return;
@@ -1143,11 +1095,16 @@ public:
     {
         npc_john_j_keeshan_43184AI(Creature *c) : ScriptedAI(c) { }
 
-        uint32 m_timer;
+        EventMap m_events;
+        ObjectGuid m_targetGUID;
+        FakeAttackMembers m_showFight;
+		uint32 m_timer;
 
         void Reset() override
         {
             m_timer = 1000;
+			m_events.RescheduleEvent(EVENT_INIT_TARGET, 1000);
+            m_showFight = FakeAttackMembers(me);
         }
 
         void DamageTaken(Unit* attacker, uint32& damage) override
@@ -1161,18 +1118,57 @@ public:
 
         void UpdateAI(uint32 diff) override
         {
-            if (m_timer <= diff)
+            m_events.Update(diff);
+
+            while (uint32 eventId = m_events.ExecuteEvent())
             {
-                m_timer = 1000;
-                DoWork();
+                switch (eventId)
+                {
+                case EVENT_INIT_TARGET:
+                {
+                    if (!m_showFight.m_hasInit)
+                    {
+                        std::list<uint32> asList;
+                        if (Creature* npc = me->FindNearestCreature(NPC_DUMPY, 15.0f))
+                        {
+                            asList.push_back(npc->GetEntry());
+                            m_targetGUID = npc->GetGUID();
+                        }
+                        if (Creature* npc = me->FindNearestCreature(NPC_BIG_EARL, 15.0f))
+                        {
+                            asList.push_back(npc->GetEntry());
+                            m_targetGUID = npc->GetGUID();
+                        }
+                        m_showFight.Initialize(asList);
+                    }
+                    m_events.ScheduleEvent(EVENT_CHECK_FIGHT, 1000);
+                    break;
+                }
+                case EVENT_CHECK_FIGHT:
+                {
+                    if (Creature* creature = m_showFight.GetSparringPartner())
+                    {
+                        if (!me->IsInCombat())
+                            me->Attack(creature, true);
+                    }
+                    else if (Creature* creature = m_showFight.GetRangedPartner())
+                    {
+                        me->SetFacingToObject(creature);
+                        if (uint32 spellId = m_showFight.GetRangedSpellId())
+                            me->CastSpell(creature, spellId, true);
+                        me->GetMotionMaster()->MoveIdle();
+                    }
+
+                    m_events.ScheduleEvent(EVENT_CHECK_FIGHT, urand(900, 1200));
+                    break;
+                }
+                }
             }
-            else
-                m_timer -= diff;
 
             if (!UpdateVictim())
                 return;
-
-            DoMeleeAttackIfReady();
+            else
+                DoMeleeAttackIfReady();
         }
 
 

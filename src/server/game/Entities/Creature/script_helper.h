@@ -239,7 +239,9 @@ public:
                         else if (spellInfo->RangeEntry->MaxRangeHostile >= 5.0f && spellInfo->DmgClass == SPELL_DAMAGE_CLASS_RANGED)
                             m_rangedSpellInfo.push_back(spellInfo);
             }
-
+		m_nearestGUID = ObjectGuid::Empty;
+		m_sparrGUID = ObjectGuid::Empty;
+		m_shootGUID = ObjectGuid::Empty;
         std::list<Creature*> cList = m_me->FindAllCreaturesInRange(30.0f);
         float dist = 30.0f;
         for (auto npc : cList)
@@ -306,7 +308,7 @@ public:
         if (Creature* creature = ObjectAccessor::GetCreature(*m_me, m_sparrGUID))
             if (!creature->isDead())
                 return creature;
-
+		m_sparrGUID = ObjectGuid::Empty;
         return nullptr;
     }
 
@@ -339,7 +341,7 @@ public:
                 if (!creature->isDead())
                     return creature;
         }
-
+		m_shootGUID = ObjectGuid::Empty;
         return nullptr;
     }
 
