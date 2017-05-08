@@ -351,7 +351,7 @@ public:
 
     bool OnTrigger(Player* player, const AreaTriggerEntry* at, bool /*entered*/) override
     {
-        if ((player->GetQuestStatus(QUEST_TUNING_THE_GNOMECORDER) == QUEST_STATUS_INCOMPLETE || player->GetQuestStatus(QUEST_TUNING_THE_GNOMECORDER) == QUEST_STATUS_COMPLETE) && at->ID == 6034)
+        if ((player->GetQuestStatus(QUEST_TUNING_THE_GNOMECORDER) == QUEST_STATUS_INCOMPLETE) && (at->ID == 6034))
         {
             player->SendPlaySound(18125, true);
             player->CastSpell(player, 81769, true);
