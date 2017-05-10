@@ -942,7 +942,7 @@ void Group::SendLootRollsComplete(Roll const& roll) const
 {
     WorldPackets::Loot::LootRollsComplete lootRollsComplete;
     lootRollsComplete.LootObj = roll->GetGUID();
-    lootRollsComplete.LootListID = roll.itemSlot + 1;
+    lootRollsComplete.LootListID = roll.itemSlot;
     lootRollsComplete.Write();
 
     for (Roll::PlayerVote::const_iterator itr = roll.playerVote.begin(); itr != roll.playerVote.end(); ++itr)
@@ -1875,7 +1875,7 @@ void Roll::FillPacket(WorldPackets::Loot::LootItemData& lootItem) const
 {
     lootItem.UIType = (totalPlayersRolling > totalNeed + totalGreed + totalPass) ? LOOT_SLOT_TYPE_ROLL_ONGOING : LOOT_SLOT_TYPE_ALLOW_LOOT;
     lootItem.Quantity = itemCount;
-    lootItem.LootListID = itemSlot + 1;
+    lootItem.LootListID = itemSlot;
     if (LootItem const* lootItemInSlot = (*this)->GetItemInSlot(itemSlot))
     {
         lootItem.CanTradeToTapList = lootItemInSlot->allowedGUIDs.size() > 1;

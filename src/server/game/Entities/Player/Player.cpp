@@ -8537,7 +8537,7 @@ void Player::SendNotifyLootItemRemoved(ObjectGuid lootObj, uint8 lootSlot) const
     WorldPackets::Loot::LootRemoved packet;
     packet.Owner = GetLootWorldObjectGUID(lootObj);
     packet.LootObj = lootObj;
-    packet.LootListID = lootSlot + 1;
+    packet.LootListID = lootSlot;
     GetSession()->SendPacket(packet.Write());
 }
 
