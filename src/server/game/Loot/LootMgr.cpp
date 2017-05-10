@@ -984,7 +984,7 @@ void Loot::BuildLootResponse(WorldPackets::Loot::LootResponse& packet, Player* v
             if (!qi->is_looted && !item.is_looted)
             {
                 WorldPackets::Loot::LootItemData lootItem;
-                lootItem.LootListID = qi->index;
+                lootItem.LootListID = qi->index + items.size();
                 lootItem.Quantity = item.count;
                 lootItem.Loot.Initialize(item);
 
