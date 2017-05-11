@@ -57,7 +57,6 @@ enum eAnimRedridgeCity
     NPC_DANFORT_INVISIBLE_DUMMY = 43366,
     GO_CHAIN_LEVER = 204403,
     SPELL_DRINK_ALCOHOL = 58952,
-    SPELL_APPLY_QUEST_INVIS_1 = 80895,
     SPELL_APPLY_QUEST_INVIS_2 = 80699,
     SPELL_APPLY_QUEST_INVIS_3 = 80815,
     SPELL_APPLY_QUEST_INVIS_4 = 80816,
@@ -73,7 +72,6 @@ enum eAnimRedridgeCity
     SPELL_APPLY_QUEST_INVIS_17 = 81897,
     SPELL_APPLY_QUEST_INVIS_18 = 82059,
     SPELL_APPLY_QUEST_INVIS_19 = 82099,
-    SPELL_DETECT_QUEST_INVIS_1 = 80695,
     SPELL_DETECT_QUEST_INVIS_2 = 80696,
     SPELL_DETECT_QUEST_INVIS_3 = 80817,
     SPELL_DETECT_QUEST_INVIS_4 = 80818,
@@ -138,12 +136,11 @@ public:
         case QUEST_TUNING_THE_GNOMECORDER:
         {
             player->AddAura(SPELL_GNOMECORDER, player);
-            player->AddAura(SPELL_DETECT_QUEST_INVIS_1, player);
             player->AddAura(SPELL_DETECT_QUEST_INVIS_3, player);
             break;
         }
         }
-        return false;
+		return false;
     }
 };
 
@@ -702,11 +699,11 @@ public:
                 case EVENT_TALK_PART_09:
                 {
                     m_state = 5;
-                    if (Unit* unit = me->GetOwner())
-                        if (Player* player = unit->ToPlayer())
+                    if (Player* player = GetPlayer())
                         {
                             player->CastSpell(player, SPELL_KILL_CREDIT_ETTIN_QUEST);
                             player->KilledMonsterCredit(341);
+							player->RemoveAura(SPELL_DETECT_QUEST_INVIS_4);
                         }
                     m_events.ScheduleEvent(EVENT_TALK_PART_10, 1000);
                     break;
@@ -845,7 +842,6 @@ public:
         case QUEST_IN_SEARCH_OF_BRAVO_COMPANY:
         {
             player->AddAura(SPELL_GNOMECORDER, player);
-            player->AddAura(SPELL_DETECT_QUEST_INVIS_1, player);
             player->AddAura(SPELL_DETECT_QUEST_INVIS_3, player);
             break;
         }

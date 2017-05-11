@@ -62,6 +62,7 @@
 #include "MiscPackets.h"
 #include "SpellPackets.h"
 #include "TalentPackets.h"
+#include "Vehicle.h"
 
 pEffect SpellEffects[TOTAL_SPELL_EFFECTS]=
 {
@@ -3234,6 +3235,37 @@ void Spell::EffectScriptEffect(SpellEffIndex effIndex)
         {
             switch (m_spellInfo->Id)
             {
+				// Control Ettin 
+                case 80704:
+                {
+                    if (m_caster->GetTypeId() == TYPEID_PLAYER)
+                        if (Creature* ettin = m_caster->FindNearestCreature(43094, 10.0f, true))
+                        {
+                            ettin->DespawnOrUnsummon();
+                            m_caster->CastSpell(m_caster, 80702, true);
+                        }
+                    return;
+                }
+                // Lift Huge Boulder
+                case 80739:
+                {
+                    if (Creature* boulder = m_caster->FindNearestCreature(43196, 15.0f, true))
+                        boulder->CastSpell(m_caster, 82566, true);
+
+                    return;
+                }
+                // Ettin Eject Passenger 1
+                case 80743:
+                {
+                    if (Creature* boulder = m_caster->FindNearestCreature(43196, 15.0f, true))
+                        if (Unit* passenger = m_caster->GetVehicleKit()->GetPassenger(0))
+                        {
+                            passenger->ExitVehicle();
+                            boulder->ExitVehicle();
+                            m_caster->GetMotionMaster()->InitDefault();
+                            boulder->GetMotionMaster()->MoveJumpTo(m_caster->GetOrientation(), 150.0f, 4.0f);
+                        }
+                }
 				// ID - 79679 Summon All Actors
                 case 79679:
                 {
